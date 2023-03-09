@@ -1,4 +1,5 @@
 ---
+# emailservice
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -34,37 +35,43 @@ spec:
     port: 5000
     targetPort: 8080
 ---
+# recommendationservice
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: xxx
+  name: recommendationservice
 spec:
   selector:
     matchLabels:
-      app: xxx
+      app: recommendationservice
   template:
     metadata:
       labels:
-        app: xxx
+        app: recommendationservice
     spec:
       containers:
-      - name: xxx
-        image: xxx
+      - name: service
+        image: gcr.io/google-samples/microservices-demo/recommendationservice
         ports:
-        - containerPort: xxx
+        - containerPort: 8080
+        env:
+        - name: PORT
+          value: "8080"
+        - name: PRODUCT_CATALOG_SERVICE_ADDR
+          value: "xxx"
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: xxx
+  name: recommendationservice
 spec:
   type: ClusterIP
   selector:
-    app: xxx
+    app: recommendationservice
   ports:
   - protocol: TCP
-    port: xxx
-    targetPort: xxx
+    port: 8080
+    targetPort: 8080
 ---
 apiVersion: apps/v1
 kind: Deployment
