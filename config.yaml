@@ -217,37 +217,41 @@ spec:
     port: 50051
     targetPort: 50051
 ---
+# adservice
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: xxx
+  name: adservice
 spec:
   selector:
     matchLabels:
-      app: xxx
+      app: adservice
   template:
     metadata:
       labels:
-        app: xxx
+        app: adservice
     spec:
       containers:
-      - name: xxx
+      - name: gcr.io/google-samples/microservices-demo/adservice
         image: xxx
         ports:
-        - containerPort: xxx
+        - containerPort: 9555
+        env:
+        - name: PORT
+          value: "9555"
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: xxx
+  name: adservice
 spec:
   type: ClusterIP
   selector:
-    app: xxx
+    app: adservice
   ports:
   - protocol: TCP
-    port: xxx
-    targetPort: xxx
+    port: 9555
+    targetPort: 9555
 ---
 apiVersion: apps/v1
 kind: Deployment
