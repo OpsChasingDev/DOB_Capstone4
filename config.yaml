@@ -161,7 +161,7 @@ spec:
     spec:
       containers:
       - name: gcr.io/google-samples/microservices-demo/currencyservice
-        image: xxx
+        image: service
         ports:
         - containerPort: 7000
         env:
@@ -181,37 +181,41 @@ spec:
     port: 7000
     targetPort: 7000
 ---
+# shippingservice
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: xxx
+  name: shippingservice
 spec:
   selector:
     matchLabels:
-      app: xxx
+      app: shippingservice
   template:
     metadata:
       labels:
-        app: xxx
+        app: shippingservice
     spec:
       containers:
-      - name: xxx
-        image: xxx
+      - name: gcr.io/google-samples/microservices-demo/shippingservice
+        image: service
         ports:
-        - containerPort: xxx
+        - containerPort: 50051
+        env:
+        - name: PORT
+          value: "50051"
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: xxx
+  name: shippingservice
 spec:
   type: ClusterIP
   selector:
-    app: xxx
+    app: shippingservice
   ports:
   - protocol: TCP
-    port: xxx
-    targetPort: xxx
+    port: 50051
+    targetPort: 50051
 ---
 apiVersion: apps/v1
 kind: Deployment
