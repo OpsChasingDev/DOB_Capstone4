@@ -145,6 +145,7 @@ spec:
     port: 50051
     targetPort: 50051
 ---
+# currencyservice
 apiVersion: apps/v1
 kind: Deployment
 metadata:
