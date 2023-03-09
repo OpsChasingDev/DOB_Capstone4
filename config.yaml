@@ -109,37 +109,41 @@ spec:
     port: 3550
     targetPort: 3550
 ---
+# paymentservice
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: xxx
+  name: paymentservice
 spec:
   selector:
     matchLabels:
-      app: xxx
+      app: paymentservice
   template:
     metadata:
       labels:
-        app: xxx
+        app: paymentservice
     spec:
       containers:
-      - name: xxx
-        image: xxx
+      - name: gcr.io/google-samples/microservices-demo/paymentservice
+        image: service
         ports:
         - containerPort: xxx
+        env:
+        - name: PORT
+          value: "50051"
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: xxx
+  name: paymentservice
 spec:
   type: ClusterIP
   selector:
-    app: xxx
+    app: paymentservice
   ports:
   - protocol: TCP
-    port: xxx
-    targetPort: xxx
+    port: 50051
+    targetPort: 50051
 ---
 apiVersion: apps/v1
 kind: Deployment
