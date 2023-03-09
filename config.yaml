@@ -2,34 +2,37 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: xxx
+  name: emailservice
 spec:
   selector:
     matchLabels:
-      app: xxx
+      app: emailservice
   template:
     metadata:
       labels:
-        app: xxx
+        app: emailservice
     spec:
       containers:
-      - name: xxx
-        image: xxx
+      - name: service
+        image: gcr.io/google-samples/microservices-demo/emailservice
         ports:
-        - containerPort: xxx
+        - containerPort: 8080
+        env:
+        - name: PORT
+          value: "8080"
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: xxx
+  name: emailservice
 spec:
   type: ClusterIP
   selector:
-    app: xxx
+    app: emailservice
   ports:
   - protocol: TCP
-    port: xxx
-    targetPort: xxx
+    port: 5000
+    targetPort: 8080
 ---
 apiVersion: apps/v1
 kind: Deployment
