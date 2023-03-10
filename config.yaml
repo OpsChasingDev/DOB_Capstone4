@@ -124,8 +124,8 @@ spec:
         app: paymentservice
     spec:
       containers:
-      - name: gcr.io/google-samples/microservices-demo/paymentservice
-        image: service
+      - name: service
+        image: gcr.io/google-samples/microservices-demo/paymentservice
         ports:
         - containerPort: 50051
         env:
@@ -160,8 +160,8 @@ spec:
         app: currencyservice
     spec:
       containers:
-      - name: gcr.io/google-samples/microservices-demo/currencyservice
-        image: service
+      - name: service
+        image: gcr.io/google-samples/microservices-demo/currencyservice
         ports:
         - containerPort: 7000
         env:
@@ -196,8 +196,8 @@ spec:
         app: shippingservice
     spec:
       containers:
-      - name: gcr.io/google-samples/microservices-demo/shippingservice
-        image: service
+      - name: service
+        image: gcr.io/google-samples/microservices-demo/shippingservice
         ports:
         - containerPort: 50051
         env:
@@ -232,8 +232,8 @@ spec:
         app: adservice
     spec:
       containers:
-      - name: gcr.io/google-samples/microservices-demo/adservice
-        image: service
+      - name: service
+        image: gcr.io/google-samples/microservices-demo/adservice
         ports:
         - containerPort: 9555
         env:
