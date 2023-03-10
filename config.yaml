@@ -420,10 +420,11 @@ kind: Service
 metadata:
   name: frontend
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app: frontend
   ports:
   - protocol: TCP
     port: 80
     targetPort: 8080
+    nodePort: 30007
