@@ -378,34 +378,35 @@ spec:
     port: 5050
     targetPort: 5050
 ---
+# frontend
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: xxx
+  name: frontend
 spec:
   selector:
     matchLabels:
-      app: xxx
+      app: frontend
   template:
     metadata:
       labels:
-        app: xxx
+        app: frontend
     spec:
       containers:
-      - name: xxx
-        image: xxx
+      - name: service
+        image: gcr.io/google-samples/microservices-demo/frontend
         ports:
-        - containerPort: xxx
+        - containerPort: 8080
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: xxx
+  name: frontend
 spec:
   type: ClusterIP
   selector:
-    app: xxx
+    app: frontend
   ports:
   - protocol: TCP
-    port: xxx
-    targetPort: xxx
+    port: 80
+    targetPort: 8080
