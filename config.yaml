@@ -123,8 +123,9 @@ spec:
           value: "3550"
         livenessProbe:
           periodSeconds: 5
-          exec:
-            command: ["/bin/grpc_health_probe", "-addr=:3550"]
+          httpGet:
+            path: /health
+            port: 3550
         readinessProbe:
           periodSeconds: 5
           exec:
