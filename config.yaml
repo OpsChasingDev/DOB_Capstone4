@@ -138,11 +138,14 @@ spec:
         env:
         - name: PORT
           value: "3550"
+        - name: DISABLE_TRACING
+          value: "1"
+        - name: DISABLE_PROFILER
+          value: "1"
         livenessProbe:
           periodSeconds: 5
-          httpGet:
-            path: /health
-            port: 3550
+          exec:
+            command: ["/bin/grpc_health_probe", "-addr=:3550"]
         readinessProbe:
           periodSeconds: 5
           exec:
